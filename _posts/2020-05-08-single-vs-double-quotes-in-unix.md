@@ -25,6 +25,6 @@ while setting up a GitHub action for the social tech collaborative website that 
 
 turns out special characters are interpreted as literals with single-quotes. 
 
-when you use double-quotes, special characters `$`, `\` and `\`` remain special 🙄
+when you use double-quotes, special characters `$`, `\` and `` ` `` remain special 🙄
 
 > Single quotes (' ') operate similarly to double quotes, but do not permit referencing variables, since the special meaning of $ is turned off. Within single quotes, every special character except ' gets interpreted literally. Consider single quotes ("full quoting") to be a stricter method of quoting than double quotes ("partial quoting"). <br> - [tldp.org](https://www.tldp.org/LDP/abs/html/quotingvar.html)
