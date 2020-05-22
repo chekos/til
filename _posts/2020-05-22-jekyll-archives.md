@@ -1,6 +1,6 @@
 ---
 title: "about jekyll-archives"
-categories: ["unix"]
+categories: ["jekyll"]
 visit: https://github.com/jekyll/jekyll-archives
 ---
 
