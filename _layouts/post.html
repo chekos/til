@@ -42,7 +42,7 @@ layout: default
                     {% endif %}
                     
                     {% for category in page.categories %}
-                      <a class="btn btn-sm btn-indigo mt-2" href="{{site.baseurl}}/category/{{ category | downcase | replace: ' ', '-'}}">
+                      <a class="btn btn-sm btn-indigo mt-2" href="/category/{{ category | downcase | replace: ' ', '-'}}">
                         # {{ category | downcase }}
                       </a>
                     {% endfor %}
@@ -53,10 +53,10 @@ layout: default
                 
                 <div class="PageNavigation">
                   {% if page.next.url %}
-                    <a class="prev" href="{{site.baseurl}}{{page.next.url}}"><i class="fa fa-angle-left"></i> </a>
+                    <a class="prev" href="{{page.next.url}}"><i class="fa fa-angle-left"></i> </a>
                   {% endif %}
                   {% if page.previous.url %}
-                    <a class="next" href="{{site.baseurl}}{{page.previous.url}}"><i class="fa fa-angle-right"></i></a>
+                    <a class="next" href="{{page.previous.url}}"><i class="fa fa-angle-right"></i></a>
                   {% endif %}
                 </div>
                 

@@ -53,3 +53,10 @@ exclude: [
   Gruntfile.coffee,
   node_modules
 ]
+
+# Archives
+jekyll-archives:
+  enabled: ['categories']
+  layout: archive
+  permalinks:
+category: '/category/:name/'

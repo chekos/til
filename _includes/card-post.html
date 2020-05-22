@@ -2,7 +2,7 @@
         
     {% unless post.image %}
     
-       <a href="{{site.baseurl}}{{post.url}}"  class="d-block p-3">
+       <a href="{{post.url}}"  class="d-block p-3">
         <h2 class="card-title title text-white mb-3">{{ post.title }}</h2>         
            <small class="d-block text-muted">{{ post.card_description | strip_html | truncatewords:25 }}</small>
         <div class="more mr-2 mb-2">                
@@ -17,13 +17,13 @@
     <div class="wrapcat">
 
          <span class="gotopost">
-             <a href="{{site.baseurl}}{{post.url}}" class="text-dark"><i class="fa fa-arrow-circle-right"></i> Check out project
+             <a href="{{post.url}}" class="text-dark"><i class="fa fa-arrow-circle-right"></i> Check out project
              </a>
          </span> 
 
         <div class="showcat">
             {% for category in post.categories %}
-              <a class="btn btn-sm btn-indigo mb-1" href="{{site.baseurl}}/category/{ category | downcase | replace: ' ', '-' }}">
+              <a class="btn btn-sm btn-indigo mb-1" href="/category/{ category | downcase | replace: ' ', '-' }}">
                 {{ category }}
               </a>
             {% endfor %}
@@ -32,7 +32,7 @@
     </div>
            
     
-        <a href="{{site.baseurl}}{{post.url}}">
+        <a href="{{post.url}}">
          
         <img class="card-img" src="{% if post.image contains "://" %}{{ post.image }}{% else %}{{ absolute_url }}assets/projects/{{ post.image }}{% endif %}" alt="{{ post.title }}">             
         
