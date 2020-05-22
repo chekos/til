@@ -6,6 +6,7 @@ logo_full: 'assets/images/logo.png'
 favicon: 'assets/images/icon.ico'
 baseurl: '/'
 email: 'sergio@cimarron.io'
+homeurl: 'https://cimarron.io/'
 
 include: ["_pages"]
 permalink: /:title/
