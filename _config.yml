@@ -52,7 +52,8 @@ exclude: [
   grunt.js,
   Gruntfile.js,
   Gruntfile.coffee,
-  node_modules
+  node_modules,
+  vendor/*,
 ]
 
 # Archives
