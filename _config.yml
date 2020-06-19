@@ -1,12 +1,12 @@
 # Site
-name: 'Cimarrón IO'
+name: "chekos' today i learned"
 description: 'Imaginemos cosas chingonas.'
 logo: 'assets/images/logo.png'
 logo_full: 'assets/images/logo.png'
 favicon: 'assets/images/icon.ico'
 baseurl: '/'
 email: 'sergio@cimarron.io'
-homeurl: 'https://cimarron.io/'
+homeurl: 'https://soyserg.io/'
 
 include: ["_pages"]
 permalink: /:title/
