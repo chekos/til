@@ -14,7 +14,7 @@ the social tech collaborative website has a `/categories/` page where each categ
 
 at first i thought i was going to have to some wild logic in a page to "fill" in each category and maybe use the page's query params but that would not be done through jekyll since jekyll creates the static website only - you can't use jekyll or liquid tags to play around with the query params.
 
-the answer was found here: https://github.com/jekyll/jekyll/issues/5672
+the answer was found here: [github.com/jekyll/jekyll/issues/5672](https://github.com/jekyll/jekyll/issues/5672)
 
 all that was needed was 
 1. to add `jekyll-archives` to the list of plug-ins
