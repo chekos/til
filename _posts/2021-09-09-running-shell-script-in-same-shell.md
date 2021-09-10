@@ -1,5 +1,5 @@
 ---
-title: "how to run a execute a shell script in the current shell"
+title: "how to execute a shell script in the current shell"
 categories: ["shell"]
 visit: https://stackoverflow.com/questions/496702/can-a-shell-script-set-environment-variables-of-the-calling-shell
 ---
