@@ -1,6 +1,6 @@
 ---
 title: what i learned
-tags: ["python", "data", "public policy"]
+# tags: ["python", "data", "public policy"]
 date: 2020-01-22
 ---
 
