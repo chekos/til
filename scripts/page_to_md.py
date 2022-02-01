@@ -4,7 +4,7 @@ import json
 import os 
 
 config = os.environ
-with open("./tils.json", "r") as tils_file:
+with open("./scripts/tils.json", "r") as tils_file:
     tils = json.loads(tils_file.read())
 
 for til in tils:
