@@ -8,5 +8,3 @@ url = '/'
 
 
 +++
-
-these are some things i've learned
