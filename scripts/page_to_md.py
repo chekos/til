@@ -12,7 +12,7 @@ for til in tils:
 
     headers = {
         "Accept": "application/json",
-        "Notion-Version": "2021-08-16",
+        "Notion-Version": "2022-02-22",
         "Authorization": f"Bearer {config['NOTION_TOKEN']}"
     }
 
