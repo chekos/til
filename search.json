@@ -35,13 +35,6 @@
     "text": "how i learned\nTesting the til-notion-integration and markdownify-notion I tried reading a list of TILs I had saved in a JSON file. However, each object was separated by a new line - not a comma. ## reference The solution (after many failed google searches) was found on a GitHub issue answered by the creator of jq → github.com/stedolan/jq/issues/124"
   },
   {
-    "objectID": "posts/2022-12-14-altair-post/index.html",
-    "href": "posts/2022-12-14-altair-post/index.html",
-    "title": "Altair post",
-    "section": "",
-    "text": "Code\nimport altair as alt\nfrom vega_datasets import data\n\nsource = data.seattle_weather.url\n\nstep = 20\noverlap = 1\n\nalt.Chart(source, height=step).transform_timeunit(\n    Month='month(date)'\n).transform_joinaggregate(\n    mean_temp='mean(temp_max)', groupby=['Month']\n).transform_bin(\n    ['bin_max', 'bin_min'], 'temp_max'\n).transform_aggregate(\n    value='count()', groupby=['Month', 'mean_temp', 'bin_min', 'bin_max']\n).transform_impute(\n    impute='value', groupby=['Month', 'mean_temp'], key='bin_min', value=0\n).mark_area(\n    interpolate='monotone',\n    fillOpacity=0.8,\n    stroke='lightgray',\n    strokeWidth=0.5\n).encode(\n    alt.X('bin_min:Q', bin='binned', title='Maximum Daily Temperature (C)'),\n    alt.Y(\n        'value:Q',\n        scale=alt.Scale(range=[step, -step * overlap]),\n        axis=None\n    ),\n    alt.Fill(\n        'mean_temp:Q',\n        legend=None,\n        scale=alt.Scale(domain=[30, 5], scheme='redyellowblue')\n    )\n).facet(\n    row=alt.Row(\n        'Month:T',\n        title=None,\n        header=alt.Header(labelAngle=0, labelAlign='right', format='%B')\n    )\n).properties(\n    title='Seattle Weather',\n    bounds='flush',\n).configure_facet(\n    spacing=0\n).configure_view(\n    stroke=None\n).configure_title(\n    anchor='end'\n)"
-  },
-  {
     "objectID": "posts/2020-06-23-how-to-delete-tags-on-remote-repos/index.html",
     "href": "posts/2020-06-23-how-to-delete-tags-on-remote-repos/index.html",
     "title": "how to delete tags on remote repos",
@@ -151,6 +144,6 @@
     "href": "index.html",
     "title": "today i learned",
     "section": "",
-    "text": "Date\n\n\nTitle\n\n\n\n\n\n\nDec 14, 2022\n\n\nAltair post\n\n\n\n\nAug 14, 2022\n\n\nUsing GitHub Actions to produce example images of code\n\n\n\n\nJan 27, 2022\n\n\nhow to solve permission error from airflow official docker image\n\n\n\n\nJan 25, 2022\n\n\njq [] syntax\n\n\n\n\nSep 9, 2021\n\n\nhow to execute a shell script in the current shell\n\n\n\n\nJun 23, 2020\n\n\nhow to delete tags on remote repos\n\n\n\n\nJun 22, 2020\n\n\nabout MyST-parser, es markdown pero rST\n\n\n\n\nJun 18, 2020\n\n\nescaping liquid tags with {% raw %}\n\n\n\n\nJun 15, 2020\n\n\nabout liquid tags\n\n\n\n\nMay 22, 2020\n\n\nabout jekyll-archives\n\n\n\n\nMay 8, 2020\n\n\nyou can’t use special characters in unix commands if you use single-quotes\n\n\n\n\n\n\nNo matching items"
+    "text": "Date\n\n\nTitle\n\n\n\n\n\n\nAug 14, 2022\n\n\nUsing GitHub Actions to produce example images of code\n\n\n\n\nJan 27, 2022\n\n\nhow to solve permission error from airflow official docker image\n\n\n\n\nJan 25, 2022\n\n\njq [] syntax\n\n\n\n\nSep 9, 2021\n\n\nhow to execute a shell script in the current shell\n\n\n\n\nJun 23, 2020\n\n\nhow to delete tags on remote repos\n\n\n\n\nJun 22, 2020\n\n\nabout MyST-parser, es markdown pero rST\n\n\n\n\nJun 18, 2020\n\n\nescaping liquid tags with {% raw %}\n\n\n\n\nJun 15, 2020\n\n\nabout liquid tags\n\n\n\n\nMay 22, 2020\n\n\nabout jekyll-archives\n\n\n\n\nMay 8, 2020\n\n\nyou can’t use special characters in unix commands if you use single-quotes\n\n\n\n\n\n\nNo matching items"
   }
 ]
