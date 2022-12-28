@@ -1,12 +1,12 @@
 name: Scrape latest data
 
 on:
-  push: 
-    paths:
-      - "content/**"
+  # push: 
+  #   paths:
+  #     - "content/**"
   workflow_dispatch:
-  schedule:
-    - cron:  '25,55 6,20 * * 1-5'
+  # schedule:
+  #   - cron:  '25,55 6,20 * * 1-5'
 
 jobs:
   scrape:
