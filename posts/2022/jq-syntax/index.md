@@ -3,7 +3,7 @@ categories:
 - jq
 - shell
 date: 2022-01-25
-title: jq [] syntax
+title: Jq [] Syntax
 ---
 
 ## what i learned

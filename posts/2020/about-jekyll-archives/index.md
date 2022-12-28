@@ -2,7 +2,7 @@
 categories:
 - jekyll
 date: 2020-05-22
-title: about jekyll-archives
+title: About Jekyll-Archives
 ---
 
 ## what i learned

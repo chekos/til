@@ -4,7 +4,7 @@ categories:
 - airflow
 - python
 date: 2022-01-27
-title: how to solve permission error from airflow official docker image
+title: How To Solve Permission Error From Airflow Official Docker Image
 ---
 
 ## what i learned

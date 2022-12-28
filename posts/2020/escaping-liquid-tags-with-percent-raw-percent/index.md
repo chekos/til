@@ -3,7 +3,7 @@ categories:
 - jekyll
 - liquid tags
 date: 2020-06-18
-title: escaping liquid tags with {% raw %}
+title: Escaping Liquid Tags With {% Raw %}
 ---
 
 ## what i learned

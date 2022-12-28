@@ -3,7 +3,7 @@ categories:
 - jekyll
 - liquid tags
 date: 2020-06-15
-title: about liquid tags
+title: About Liquid Tags
 ---
 
 ## what i learned

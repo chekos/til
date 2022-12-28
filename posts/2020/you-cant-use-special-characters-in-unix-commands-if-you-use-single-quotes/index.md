@@ -2,7 +2,7 @@
 categories:
 - unix
 date: 2020-05-08
-title: you can't use special characters in unix commands if you use single-quotes
+title: You Can'T Use Special Characters In Unix Commands If You Use Single-Quotes
 ---
 
 ## what i learned

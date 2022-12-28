@@ -2,7 +2,7 @@
 categories:
 - git
 date: 2020-06-23
-title: how to delete tags on remote repos
+title: How To Delete Tags On Remote Repos
 ---
 
 ## what i learned

@@ -5,7 +5,7 @@ categories:
 - quarto
 - notion
 date: 2022-08-14
-title: Using GitHub Actions to produce example images of code
+title: Using Github Actions To Produce Example Images Of Code
 ---
 
 ## what i learned

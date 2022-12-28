@@ -2,7 +2,7 @@
 categories:
 - shell
 date: 2021-09-09
-title: how to execute a shell script in the current shell
+title: How To Execute A Shell Script In The Current Shell
 ---
 
 ## what i learned

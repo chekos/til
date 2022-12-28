@@ -3,7 +3,7 @@ categories:
 - sphinx
 - docs
 date: 2020-06-22
-title: about MyST-parser, es markdown pero rST
+title: About Myst-Parser, Es Markdown Pero Rst
 ---
 
 ## what i learned
