@@ -83,7 +83,7 @@ def move_post(post: Path) -> Path:
 if __name__ == "__main__":
     extentions = [".md", ".qmd"]
     for extention in extentions:
-        posts_dir = Path(__file__).parent.parent.joinpath("posts").resolve()
+        posts_dir = Path(__file__).parent.parent.joinpath("tils").resolve()
         posts = posts_dir.glob(f"*{extention}")
         for post in posts:
             print(post)

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "posts/**"
+      - "tils/**"
       - "about.qmd"
       - "index.qmd"
       - "_quarto.yml"
