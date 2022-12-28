@@ -1,0 +1,30 @@
+---
+title: "About"
+image: static/img/profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: twitter
+      aria-label: twitter
+      href: https://twitter.com/chekoswh
+    - icon: linkedin
+      text: LinkedIn
+      aria-label: linkedin
+      href: https://linkedin.com/in/chekos
+    - icon: github
+      text: GitHub
+      aria-label: github
+      href: https://github.com/chekos
+    - icon: mastodon
+      text: Mastodon
+      aria-label: mastodon
+      href: https://masto.tacosdedatos.com/@chekos
+
+---
+
+¡hola! 👋🏼
+
+my name is Sergio Sánchez Zavala but i go by chekos (/che/ like Guevara, /kos/ like 'costly', in lowercase) and i work as a data engineer. i'm a hip hop head policy wonk data nerd. 
+
+this section of chekos.dev is a collection of things i've learned. it was inspired by Simon Wilson's and Vicki Boykis' TIL repos.
