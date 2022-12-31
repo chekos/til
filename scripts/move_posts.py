@@ -86,5 +86,6 @@ if __name__ == "__main__":
         posts_dir = Path(__file__).parent.parent.joinpath("tils").resolve()
         posts = posts_dir.glob(f"*{extention}")
         for post in posts:
-            print(post)
-            new_path = move_post(post)
+            if not post.stem.startswith("_"):
+                print(post)
+                new_path = move_post(post)

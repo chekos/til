@@ -1,0 +1,31 @@
+---
+categories: [template, test]
+title: Template post
+---
+
+## what i learned
+
+describing what i learned
+
+Code section with regular `shell` and not `{python}` or `{ojs}` or `{r}` so it won't execute
+```shell
+gh repo create <name> \
+--public \
+--add-readme \
+--clone \
+--gitignore Python \
+--license bsd-3-clause-clear
+```
+
+## how i learned
+what was i doing ?
+
+
+## reference
+include links here. can use regular markdown syntax or also `<link.com>`.
+
+for example: 
+* GitHub CLI manual: <https://cli.github.com/manual/>
+  - [`gh alias set`](https://cli.github.com/manual/gh_alias_set)
+  - [`gh repo create`](https://cli.github.com/manual/gh_repo_create)
+* GitHub Docs about licenses: <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#searching-github-by-license-type>
