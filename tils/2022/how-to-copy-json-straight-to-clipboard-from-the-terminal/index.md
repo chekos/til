@@ -26,3 +26,4 @@ jq '.[-5:]' interim/streaming_history.json | pbcopy
 
 ## reference
 * `jq` play sandbox environment online: <jqplay.org>
+  - what i ended up using jqplay for: <https://jqplay.org/s/AMl-8okc7or>
