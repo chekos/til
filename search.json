@@ -95,7 +95,7 @@
     "href": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#reference",
     "title": "How To Copy Json Straight To Clipboard From The Terminal",
     "section": "reference",
-    "text": "reference\n\njq play sandbox environment online: <jqplay.org>"
+    "text": "reference\n\njq play sandbox environment online: <jqplay.org>\n\nwhat i ended up using jqplay for: https://jqplay.org/s/AMl-8okc7or"
   },
   {
     "objectID": "tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html",
