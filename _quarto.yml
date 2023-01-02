@@ -36,7 +36,7 @@ format:
     theme: 
       light: minty
       dark: darkly
-    css: static/css/styles.css
+    css: css/styles.css
     code-fold: true
     code-line-numbers: true
     code-copy: true
