@@ -2,58 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://til.chekos.dev/about.html</loc>
-    <lastmod>2022-12-31T17:41:42.274Z</lastmod>
+    <lastmod>2023-01-02T18:39:55.542Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/index.html</loc>
-    <lastmod>2022-12-31T17:41:44.790Z</lastmod>
+    <lastmod>2023-01-02T18:39:59.562Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html</loc>
-    <lastmod>2022-12-31T17:41:46.734Z</lastmod>
+    <lastmod>2023-01-02T18:40:01.806Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2022/using-github-actions-to-produce-example-images-of-code/index.html</loc>
-    <lastmod>2022-12-31T17:41:48.918Z</lastmod>
+    <lastmod>2023-01-02T18:40:04.330Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html</loc>
-    <lastmod>2022-12-31T17:41:50.790Z</lastmod>
+    <lastmod>2023-01-02T18:40:06.643Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2022/jq-syntax/index.html</loc>
-    <lastmod>2022-12-31T17:41:52.706Z</lastmod>
+    <lastmod>2023-01-02T18:40:08.891Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</loc>
-    <lastmod>2022-12-31T17:41:54.662Z</lastmod>
+    <lastmod>2023-01-02T18:40:11.155Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html</loc>
-    <lastmod>2022-12-31T17:41:56.338Z</lastmod>
+    <lastmod>2023-01-02T18:40:13.131Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2020/about-liquid-tags/index.html</loc>
-    <lastmod>2022-12-31T17:41:58.014Z</lastmod>
+    <lastmod>2023-01-02T18:40:15.103Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html</loc>
-    <lastmod>2022-12-31T17:41:59.710Z</lastmod>
+    <lastmod>2023-01-02T18:40:17.131Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2020/about-jekyll-archives/index.html</loc>
-    <lastmod>2022-12-31T17:42:01.598Z</lastmod>
+    <lastmod>2023-01-02T18:40:19.139Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html</loc>
-    <lastmod>2022-12-31T17:42:03.514Z</lastmod>
+    <lastmod>2023-01-02T18:40:21.380Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2020/about-myst-parser-es-markdown-pero-rst/index.html</loc>
-    <lastmod>2022-12-31T17:42:05.158Z</lastmod>
+    <lastmod>2023-01-02T18:40:23.384Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2020/how-to-delete-tags-on-remote-repos/index.html</loc>
-    <lastmod>2022-12-31T17:42:07.350Z</lastmod>
+    <lastmod>2023-01-02T18:40:25.664Z</lastmod>
   </url>
 </urlset>
