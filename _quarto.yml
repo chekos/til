@@ -3,6 +3,7 @@ project:
 
 website:
   title: "til"
+  description: "chekos' today i learned"
   site-url: https://til.chekos.dev
   repo-url: https://github.com/chekos/til
   reader-mode: true
