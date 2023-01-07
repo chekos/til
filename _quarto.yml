@@ -12,7 +12,7 @@ website:
     creator: "@ChekosWH"
     card-style: summary_large_image 
   navbar:
-    logo: static/img/cimarron-logo-no-background.png
+    logo: /images/cimarron-logo-no-background.png
     background: secondary
     right:
       - about.qmd
@@ -31,12 +31,16 @@ website:
       - icon: instagram
         aria-label: instagram
         href: https://instagram.com/chekos.visuals
+      - icon: rss
+        aria-label: rss
+        href: index.xml
+        
 format:
   html:
     theme: 
       light: minty
       dark: darkly
-    css: css/styles.css
+    css: /css/styles.css
     code-fold: true
     code-line-numbers: true
     code-copy: true
