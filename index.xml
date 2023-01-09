@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>til</title>
+<link>https://til.chekos.dev/index.html</link>
+<atom:link href="https://til.chekos.dev/index.xml" rel="self" type="application/rss+xml"/>
+<description>chekos&#39; today i learned</description>
+<generator>quarto-1.2.313</generator>
+<lastBuildDate>Sat, 31 Dec 2022 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>How To Copy Json Straight To Clipboard From The Terminal</title>
+  <link>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>Piping output to <code>pbcopy</code> to copy and paste output from the terminal</p>
+<p>Here’s how I can grab the last 10 elements of a JSON array and copy them to my clipboard.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1">jq '.[-10:]' mydata.json | pbcopy</span></code></pre></div>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>I’ve been working with my spotify streaming history data and it’s a lot of nested data so I’ve been using <code>jq</code> a lot.</p>
+<p>I’m working on restructuring a complicated nested JSON so I went to &lt;jqplay.org&gt; and I needed some sample data. I remember reading a tweet or maybe a tip on a Medium article about piping to <code>pbcopy</code> so I figured I’d try it and document it.</p>
+<p>The final code looked more like</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1">jq '.[-5:]' interim/streaming_history.json | pbcopy</span></code></pre></div>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">reference</h2>
+<ul>
+<li><code>jq</code> play sandbox environment online: &lt;jqplay.org&gt;
+<ul>
+<li>what i ended up using jqplay for: <a href="https://jqplay.org/s/AMl-8okc7or" class="uri">https://jqplay.org/s/AMl-8okc7or</a></li>
+</ul></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>jq</category>
+  <category>shell</category>
+  <guid>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</guid>
+  <pubDate>Sat, 31 Dec 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How To Create An Alias In The gh-cli</title>
+  <link>https://til.chekos.dev/tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>you can create aliases in the GitHub CLI. i’m not super familiar with aliases. i’ve used them in the past to automate long commands. currently i’m using a couple at work to shorten <code>dbt</code> commmands ever so slightly (from <code>dbt run --target prod --select &lt;models&gt;</code> to <code>prod-run &lt;selection query&gt;</code>).</p>
+<p>however, i had only seen these as aliases one sets up at the <em>profile</em> level/scope. as in, we’d go to <code>~/.bash_profile</code> or <code>~/.zsh_profile</code> and add a new alias that’s set every time we open a new terminal.</p>
+<p>this is the first time i see a cli offer that <em>within</em> the tool itself. i wonder if this is a common practice i’ve missed until now.</p>
+<p>in the GitHub cli you can use the command <code>alias set</code> to set an alias (<a href="https://cli.github.com/manual/gh_alias_set">docs</a>).</p>
+<p>i usually have to google the full list of flags i would like to run when creating a repo via the <code>gh-cli</code> so i figured i’d save it as an alias now. this is why i <del>wish i remembered</del> would like to run most times:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1">gh repo create &lt;name&gt; \</span>
+<span id="cb1-2">--public \</span>
+<span id="cb1-3">--add-readme \</span>
+<span id="cb1-4">--clone \</span>
+<span id="cb1-5">--gitignore Python \</span>
+<span id="cb1-6">--license bsd-3-clause-clear</span></code></pre></div>
+<p>simplye <em>create a public repo named <name> include a ReadME, a license and a gitignore file and finally clone it to the local directory.</name></em></p>
+<p>i might add the <code>--disable-wiki</code> simply because i don’t use the wikis.</p>
+<p>from the docs: &gt; <em>The expansion may specify additional arguments and flags. If the expansion includes positional placeholders such as “$1”, extra arguments that follow the alias will be inserted appropriately. Otherwise, extra arguments will be appended to the expanded command.</em></p>
+<p>so what i did was run</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1">gh alias set pyrepo 'repo create "$1" --public --add-readme --clone --gitignore=Python --license=bsd-3-clause-clear'</span></code></pre></div>
+<p>and if i choose to i can add a description by adding <code>-d "my repos description"</code> right after <code>gh pyrepo &lt;name&gt;</code></p>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>i’ve been creating lots of small project repos lately and this feels like a small automation that could solve some frustrations.</p>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">reference</h2>
+<ul>
+<li>GitHub CLI manual: <a href="https://cli.github.com/manual/" class="uri">https://cli.github.com/manual/</a>
+<ul>
+<li><a href="https://cli.github.com/manual/gh_alias_set"><code>gh alias set</code></a></li>
+<li><a href="https://cli.github.com/manual/gh_repo_create"><code>gh repo create</code></a></li>
+</ul></li>
+<li>GitHub Docs about licenses: <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#searching-github-by-license-type" class="uri">https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#searching-github-by-license-type</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>gh</category>
+  <category>automation</category>
+  <guid>https://til.chekos.dev/tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html</guid>
+  <pubDate>Wed, 28 Dec 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Using Github Actions To Produce Example Images Of Code</title>
+  <link>https://til.chekos.dev/tils/2022/using-github-actions-to-produce-example-images-of-code/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>I learned to chain a lot of small tools using GitHub Actions to produce ready-to-share images of code examples for social media (namely, instagram and twitter) from my phone. The steps, generally speaking, go as follows:</p>
+<ol type="1">
+<li>Create a new page on a Notion Database. Probably will create a specific template for this, like I do with TIL’s but it’s not necessary.</li>
+<li>GitHub Action: Use my <code>markdownify-notion</code> python package to write the markdown version of this page and save it on a “quarto project” folder. This let’s me use one general front-matter yaml file for all files rather than automate adding front matter to each file. I can still add specific front matter to files if I want to. (this TIL is an example of how this works - I’m writing it on Notion on my phone.)</li>
+<li>GitHub Action: Use Quarto to render this markdown file <code>--to html</code> and save it on an “output” directory. This will execute the code in the code cells and save the output inline.</li>
+<li>GitHub Action: Use <code>shot-scraper</code> to produce two files: a png screenshot and a pdf file. I’m using <code>shot-scraper</code> for the PDF as well rather than using quarto because it’s easier and I am not in need of customizing this pdf file at all just yet. I’m creating it and saving it essentially just because I can, it’s easy, and might find use for it later.</li>
+<li>GitHub Action: Once there are new png or pdf files in the “output” directory, I then use <code>s3-credentials</code> to <em>put</em> those <em>objects</em> on a S3 bucket I also created using <code>s3-credentials</code> . This tool is fantastic s3-credentials.readthedocs.io</li>
+</ol>
+<p>This is how the final image looks like</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://til.chekos.dev/tils/2022/using-github-actions-to-produce-example-images-of-code/https:/s3.us-west-2.amazonaws.com/secure.notion-static.com/04380cef-2bfc-43f9-a2af-5feed89f0ac4/9EB00936-09DE-4836-93B6-8504E7E036A8.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221216%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20221216T205710Z&amp;X-Amz-Expires=3600&amp;X-Amz-Signature=fa6ba352215a639f6a8d3c89cb72397e0d310da5ef891c439e528def853f20dc&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">9EB00936-09DE-4836-93B6-8504E7E036A8</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>I wanted to checkout quarto for a while and in the last rstudio conference they announced it was finally at version 1.0 so I gave it a try. It’s fairly straightforward but the documentation is clearly aimed at helping beginners and people that may not have any programming experience so a lot of the guides and tutorials and examples are for using Quarto within an editor like Rstudio or VS Code. It was hard to find examples of how to use it programmatically <em>on your own</em> - even the automating examples are using their GitHub Actions and services like Quarto publishing. This is actually great in general but if you need to do something custom they may not offer yet you need to figure it out on your own. ## reference * Quarto: <a href="https://quarto.org">quarto.org</a></p>
+<ul>
+<li><p>shot-scraper: <a href="http://shot-scraper.datasette.io/en/stable/">shot-scraper.datasette.io/en/stable/</a></p></li>
+<li><p>s3-credentials: <a href="http://s3-credentials.readthedocs.io/en/stable/">s3-credentials.readthedocs.io/en/stable/</a></p></li>
+<li><p>markdownify-notion: <a href="http://github.com/chekos/markdownify-notion">github.com/chekos/markdownify-notion</a></p></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>gh-actions</category>
+  <category>quarto</category>
+  <category>notion</category>
+  <guid>https://til.chekos.dev/tils/2022/using-github-actions-to-produce-example-images-of-code/index.html</guid>
+  <pubDate>Sun, 14 Aug 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/04380cef-2bfc-43f9-a2af-5feed89f0ac4/9EB00936-09DE-4836-93B6-8504E7E036A8.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221216%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20221216T205710Z&amp;X-Amz-Expires=3600&amp;X-Amz-Signature=fa6ba352215a639f6a8d3c89cb72397e0d310da5ef891c439e528def853f20dc&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" medium="image"/>
+</item>
+<item>
+  <title>How To Solve Permission Error From Airflow Official Docker Image</title>
+  <link>https://til.chekos.dev/tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>tl;dr: when you use the Airflow official docker image you need to make sure that the variable <code>AIRFLOW_UID</code> is set to match <strong>your</strong> UID (and <code>AIRFLOW_GID=0</code> aka <code>root</code> ) or you’re going to get permission errors. i was working on deploying Airflow on a VM at work this week and I got a permission error (Errno 13) regarding the containers’ python’s logging config. When I first started working with this <code>docker-compose.yml</code> i used the suggested <code>echo -e "AIRFLOW_UID=$(id -u)" &gt; .env</code> command which provided my user id (let’s say it’s <strong>506</strong> ) from my local machine and assigned it to the <code>AIRFLOW_UID</code> key. Now that i am working in the VM and have extended my <code>.env</code> file to include other information i figured i could just use a copy of the same file. Everything else works fine except airflow cannot write logs because the user in this virtual machine with user id <strong>506</strong> does not have permission to write to this <code>./logs/</code> directory. If you google this error i found — among a sea of <em>almost</em> right answers — that most of the solutions online are variations of “change the logs folder’s permissions to 777” meaning anyone can read, write, and execute the contents of the logs. That works. However, you don’t really need <em>everyone</em> to be able to read and write — just this airflow user. Updating the UID on the VM’s <code>.env</code> file worked perfectly without having to mess with the permissions. ## how i learned i kept getting permissions errors so i changed the <code>./logs/</code> directories permissions to 777 and ran <code>docker-compose up airflow-init</code> . Now that airflow was able to write logs i could run <code>ls -l logs/</code> and see that the owner of these logs was some user with id <strong>506</strong> which i recognized from the <code>.env</code> file. From there all i had to do was run <code>id -u</code> to find the correct user id (the id of the user i’m logged in as in this VM) and update the <code>.env</code> file to match. ## reference the airflow documentation → <a href="https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html#setting-the-right-airflow-user">airflow.apache.org/docs/apache-airflow/stable/start/docker.html</a></p>
+<p>this stackoverflow answer → <a href="https://stackoverflow.com/questions/67698656/cant-init-db-for-airflow-docker-compose-permission-denied/67704988#67704988">stackoverflow.com/questions/67698656/cant-init-db-for-airflow-docker-compose-permission-denied/67704988</a></p>
+<p>this <strong>fantastic</strong> explanation of user and groups permissions → <a href="https://unix.stackexchange.com/questions/116070/granting-write-permissions-to-a-group-to-a-folder">unix.stackexchange.com/questions/116070/granting-write-permissions-to-a-group-to-a-folder</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>docker</category>
+  <category>airflow</category>
+  <category>python</category>
+  <guid>https://til.chekos.dev/tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html</guid>
+  <pubDate>Thu, 27 Jan 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Jq [] Syntax</title>
+  <link>https://til.chekos.dev/tils/2022/jq-syntax/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>If you want to dump a list of objects you’re constructing from some other json you need to wrap your entire <code>jq</code> string in square brackets ( <code>[]</code> ). Otherwise you’ll be writing each object one at a time and that’s not valid JSON. For example, running something like</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1">jq '.[] | {id: .id, title: .title, created: .created }'</span></code></pre></div>
+<p>returns →</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb2-1"><span class="fu" style="color: #4758AB;">{</span></span>
+<span id="cb2-2">    <span class="er" style="color: #AD0000;">id</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"123"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb2-3">    <span class="er" style="color: #AD0000;">title</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"page 1"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb2-4">    <span class="er" style="color: #AD0000;">created</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"2022-01-25T23:15:00.000Z"</span></span>
+<span id="cb2-5"><span class="fu" style="color: #4758AB;">}</span></span>
+<span id="cb2-6"><span class="fu" style="color: #4758AB;">{</span></span>
+<span id="cb2-7">    <span class="er" style="color: #AD0000;">id</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"124"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb2-8">    <span class="er" style="color: #AD0000;">title</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"page 2"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb2-9">    <span class="er" style="color: #AD0000;">created</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"2022-01-26T13:18:15.000Z"</span></span>
+<span id="cb2-10"><span class="fu" style="color: #4758AB;">}</span></span>
+<span id="cb2-11"><span class="fu" style="color: #4758AB;">{</span></span>
+<span id="cb2-12">    <span class="er" style="color: #AD0000;">id</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"125"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb2-13">    <span class="er" style="color: #AD0000;">title</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"page 3"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb2-14">    <span class="er" style="color: #AD0000;">created</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"2022-01-27T18:37:05.000Z"</span></span>
+<span id="cb2-15"><span class="fu" style="color: #4758AB;">}</span></span></code></pre></div>
+<p>This file is not valid JSON. However, if you wrap your entire expression in square brackets <code>[]</code> <code>jq</code> will group these all as a list of objects instead of appending each object at a time.</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1">jq '[.[] | { id: .id, title: .title, created: .created }]'</span></code></pre></div>
+<p>returns →</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb4-1"><span class="ot" style="color: #003B4F;">[</span></span>
+<span id="cb4-2">    <span class="fu" style="color: #4758AB;">{</span></span>
+<span id="cb4-3">        <span class="er" style="color: #AD0000;">id</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"123"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb4-4">        <span class="er" style="color: #AD0000;">title</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"page 1"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb4-5">        <span class="er" style="color: #AD0000;">created</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"2022-01-25T23:15:00.000Z"</span></span>
+<span id="cb4-6">    <span class="fu" style="color: #4758AB;">}</span><span class="ot" style="color: #003B4F;">,</span></span>
+<span id="cb4-7">    <span class="fu" style="color: #4758AB;">{</span></span>
+<span id="cb4-8">        <span class="er" style="color: #AD0000;">id</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"124"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb4-9">        <span class="er" style="color: #AD0000;">title</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"page 2"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb4-10">        <span class="er" style="color: #AD0000;">created</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"2022-01-26T13:18:15.000Z"</span></span>
+<span id="cb4-11">    <span class="fu" style="color: #4758AB;">}</span><span class="ot" style="color: #003B4F;">,</span></span>
+<span id="cb4-12">    <span class="fu" style="color: #4758AB;">{</span></span>
+<span id="cb4-13">        <span class="er" style="color: #AD0000;">id</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"125"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb4-14">        <span class="er" style="color: #AD0000;">title</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"page 3"</span><span class="fu" style="color: #4758AB;">,</span></span>
+<span id="cb4-15">        <span class="er" style="color: #AD0000;">created</span><span class="fu" style="color: #4758AB;">:</span> <span class="st" style="color: #20794D;">"2022-01-27T18:37:05.000Z"</span></span>
+<span id="cb4-16">    <span class="fu" style="color: #4758AB;">}</span></span>
+<span id="cb4-17"><span class="ot" style="color: #003B4F;">]</span></span></code></pre></div>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>Testing the <code>til-notion-integration</code> and <code>markdownify-notion</code> I tried reading a list of TILs I had saved in a JSON file. However, each object was separated by a new line - not a comma. ## reference The solution (after many failed google searches) was found on a GitHub issue answered by the creator of <code>jq</code> → <a href="https://github.com/stedolan/jq/issues/124#issuecomment-17875972">github.com/stedolan/jq/issues/124</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>jq</category>
+  <category>shell</category>
+  <guid>https://til.chekos.dev/tils/2022/jq-syntax/index.html</guid>
+  <pubDate>Tue, 25 Jan 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How To Execute A Shell Script In The Current Shell</title>
+  <link>https://til.chekos.dev/tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>when you execute a shell script, it defaults to creating a new shell, executing the script in that shell and closing it. if you want to, for example, set environmental variables you would need to run the script in the current shell. let’s say you want to have a short shell script that sets the database url as an environmental variable called <code>env_vars.sh</code>.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1">#!/bin/bash</span>
+<span id="cb1-2">export DATABASE_URL="super_secret_url"</span></code></pre></div>
+<p>if you run</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1">sh env_vars.sh</span></code></pre></div>
+<p>in your terminal, it would run said script in a new shell and therefore those environmental variables would not be set in your current shell and would then be unavailable to your other scripts.</p>
+<p>to run that in your current shell you use the following syntax</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1">. ./env_vars.sh</span></code></pre></div>
+<p>this way your environmental variables are set in your current shell and you can use them as expected.</p>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>i’m testing <code>SQLModel</code> and wanted to test access to snowflake. instead of setting the environmental variables manually i thought i’d just run a script that had <code>export snowflake_username="xyz"</code> etc, etc. however, when i ran the script and tried to use <code>os.environ['snowflake_username']</code> i’d get an error.</p>
+<p>finding the solution was surprisingly fast.</p>
+<section id="visit" class="level3">
+<h3 class="anchored" data-anchor-id="visit">visit</h3>
+<p>https://stackoverflow.com/questions/496702/can-a-shell-script-set-environment-variables-of-the-calling-shell</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>shell</category>
+  <guid>https://til.chekos.dev/tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html</guid>
+  <pubDate>Thu, 09 Sep 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How To Delete Tags On Remote Repos</title>
+  <link>https://til.chekos.dev/tils/2020/how-to-delete-tags-on-remote-repos/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>you can delete remote tags from your github repository using <code>git push --delete origin &lt;TAG NAME&gt;</code> or you can delete locally and then push those changes to your remote repo</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1">git tag -d 0.0.7</span>
+<span id="cb1-2">git push origin :refs/tag/0.0.7</span></code></pre></div>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>recently someone became the very first contributor to <code>pypums</code> and when i merged their contribution and tried to automatically build and publish the package to PyPI i found myself making an error. at first i tried to create a release on github then i realized i had not changed the versions accordingly in setup.py and the other files. i had already tagged it as 0.0.7, however, so i had to delete the tag, fix the versions, tag it again.</p>
+<p>i had done this before a few times but this time i found this very quick and easy explanatory post: <a href="https://devconnected.com/how-to-delete-local-and-remote-tags-on-git/">how to delete local and remote tags on git</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>git</category>
+  <guid>https://til.chekos.dev/tils/2020/how-to-delete-tags-on-remote-repos/index.html</guid>
+  <pubDate>Tue, 23 Jun 2020 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>About Myst-Parser, Es Markdown Pero Rst</title>
+  <link>https://til.chekos.dev/tils/2020/about-myst-parser-es-markdown-pero-rst/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>MyST-parser is <strong>so easy to use</strong> and it provides all the functionality i need to make docs without using rST.</p>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>i was creating the docs for <a href="https://tacosdedatos-utils.rtfd.io"><code>tacosdedatos-utils</code></a> and i rather not touch rST ever. i had seen <a href="https://twitter.com/choldraf"><span class="citation" data-cites="choldraf">@choldraf</span></a> tweet <a href="https://twitter.com/choldgraf/status/1272633413132943360?s=20">about MyST before</a> but i had not had the need to use it.</p>
+<p>today i made the documentation for that small utils package and it was actually a pleasant experience? the underlying concepts of rST (roles, directives, etc etc) are still a little fuzzy but the syntax makes a ton more sense now so it’s one less challenge for me.</p>
+<p>official docs: <a href="https://myst-parser.readthedocs.io/en/latest/">myst-parser.readthedocs.io</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>sphinx</category>
+  <category>docs</category>
+  <guid>https://til.chekos.dev/tils/2020/about-myst-parser-es-markdown-pero-rst/index.html</guid>
+  <pubDate>Mon, 22 Jun 2020 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Escaping Liquid Tags With {% Raw %}</title>
+  <link>https://til.chekos.dev/tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>you can use the tags <code>raw</code> and <code>endraw</code> to escape liquid tags.</p>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>in the <a href="../liquid-tags-cheatsheet">previous TIL</a> i tried to write the following</p>
+<p>{% raw %} i am moving soyserg.io from a hugo site to jekyll and i couldn’t figure out how to have nested <code>{{}}</code> as in <code>{{ category/{{category | downcase }} | relative_url }}</code> which just doesn’t work. so i moved to <code>{{ 'category/' | append: category | downcase | relative_url }}</code> {% endraw %}</p>
+<p>but it was not possible off the bat because of the double <code>{}</code>. at first i tried to escape them as <code>\{\{\}\}</code> but that did not work.</p>
+<p>{% raw %} turns out the answer is the <code>{% raw %}</code> tag. {% endraw %}</p>
+<p>the paragraph then looks like this in the markdown file</p>
+<p>{% raw %}</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><span class="in" style="color: #5E5E5E;">`{% raw %}`</span></span>
+<span id="cb1-2">i am moving soyserg.io from a hugo site to jekyll and i couldn't figure out how to have nested <span class="in" style="color: #5E5E5E;">`{{}}`</span> as in <span class="in" style="color: #5E5E5E;">`{{ category/{{category | downcase }} | relative_url }}`</span> which just doesn't work. so i moved to <span class="in" style="color: #5E5E5E;">`{{ 'category/' | append: category | downcase | relative_url }}`</span></span>
+<span id="cb1-3"><span class="in" style="color: #5E5E5E;">`% endraw %`</span></span></code></pre></div>
+<p>{% endraw %}</p>
+<section id="visit" class="level3">
+<h3 class="anchored" data-anchor-id="visit">visit</h3>
+<p>https://stackoverflow.com/questions/24102498/escaping-double-curly-braces-inside-a-markdown-code-block-in-jekyll</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>jekyll</category>
+  <category>liquid tags</category>
+  <guid>https://til.chekos.dev/tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html</guid>
+  <pubDate>Thu, 18 Jun 2020 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>About Liquid Tags</title>
+  <link>https://til.chekos.dev/tils/2020/about-liquid-tags/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>shopify has a github pages site documenting liquid tags which is very useful and easy to use.</p>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>{% raw %} i am moving soyserg.io from a hugo site to jekyll and i couldn’t figure out how to have nested <code>{{}}</code> as in <code>{{ category/{{category | downcase }} | relative_url }}</code> which just doesn’t work. so i moved to <code>{{ 'category/' | append: category | downcase | relative_url }}</code> {% endraw %}</p>
+<p>the answer was found here: <a href="https://shopify.github.io/liquid/">shopify.github.io/liquid</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>jekyll</category>
+  <category>liquid tags</category>
+  <guid>https://til.chekos.dev/tils/2020/about-liquid-tags/index.html</guid>
+  <pubDate>Mon, 15 Jun 2020 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>About Jekyll-Archives</title>
+  <link>https://til.chekos.dev/tils/2020/about-jekyll-archives/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>there’s a jekyll-plugin named <code>jekyll-archives</code> that lets you create archives of your posts based on metadata/front matter.</p>
+<p>i used it for <a href="https://socialtech.us/">socialtech.us</a> to create a <code>category/${category}</code> page for each of the categories in the site (created dynamically).</p>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>the social tech collaborative website has a <code>/categories/</code> page where each category has a header so you can get to each category via url like <code>socialtech.us/categories#${category}</code>. for example, you could go to <code>socialtech.us/categories#texting</code> if you wanted to see the plays with the tag <code>texting</code>. however, because each play can have multiple categories, plays would appear multiple times in the <code>/categories</code> page. we wanted a page per category.</p>
+<p>at first i thought i was going to have to some wild logic in a page to “fill” in each category and maybe use the page’s query params but that would not be done through jekyll since jekyll creates the static website only - you can’t use jekyll or liquid tags to play around with the query params.</p>
+<p>the answer was found here: <a href="https://github.com/jekyll/jekyll/issues/5672">github.com/jekyll/jekyll/issues/5672</a></p>
+<p>all that was needed was 1. to add <code>jekyll-archives</code> to the list of plug-ins 2.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource ruby number-lines code-with-copy"><code class="sourceCode ruby"><span id="cb1-1"><span class="co" style="color: #5E5E5E;"># Archives</span></span>
+<span id="cb1-2">jekyll<span class="kw" style="color: #003B4F;">-</span>archives:</span>
+<span id="cb1-3">  <span class="wa" style="color: #5E5E5E;
+font-style: italic;">enabled: </span><span class="kw" style="color: #003B4F;">[</span><span class="vs" style="color: #20794D;">'categories'</span><span class="kw" style="color: #003B4F;">]</span></span>
+<span id="cb1-4">  <span class="wa" style="color: #5E5E5E;
+font-style: italic;">layout: </span>archive</span>
+<span id="cb1-5">  permalinks:</span>
+<span id="cb1-6">    <span class="wa" style="color: #5E5E5E;
+font-style: italic;">category: </span><span class="vs" style="color: #20794D;">'/category/:name/'</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>add an <code>archive.html</code> to <code>_layouts/</code></li>
+</ol>
+<section id="visit" class="level3">
+<h3 class="anchored" data-anchor-id="visit">visit</h3>
+<p>https://github.com/jekyll/jekyll-archives</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>jekyll</category>
+  <guid>https://til.chekos.dev/tils/2020/about-jekyll-archives/index.html</guid>
+  <pubDate>Fri, 22 May 2020 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>You Can’T Use Special Characters In Unix Commands If You Use Single-Quotes</title>
+  <link>https://til.chekos.dev/tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>You can’t insert variables in Unix commands if you’re using single quotes.</p>
+<p>this won’t work</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1">export SECRET="huh"</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">echo 'you can not see my secret $SECRET'</span></code></pre></div>
+<p>but this will</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1">export SECRET="huh"</span>
+<span id="cb2-2"></span>
+<span id="cb2-3">echo "you can see my secret $SECRET"</span></code></pre></div>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>while setting up a GitHub action for the social tech collaborative website that would send a url to a specific slack channel, i would get <code>$TARGET_URL</code> instead of the actual url.</p>
+<p>turns out special characters are interpreted as literals with single-quotes.</p>
+<p>when you use double-quotes, special characters <code>$</code>, <code>\</code> and <code>`</code> remain special 🙄</p>
+<blockquote class="blockquote">
+<p>Single quotes (’ ‘) operate similarly to double quotes, but do not permit referencing variables, since the special meaning of $ is turned off. Within single quotes, every special character except’ gets interpreted literally. Consider single quotes (“full quoting”) to be a stricter method of quoting than double quotes (“partial quoting”). <br> - <a href="https://www.tldp.org/LDP/abs/html/quotingvar.html">tldp.org</a></p>
+</blockquote>
+
+
+</section>
+
+ ]]></description>
+  <category>unix</category>
+  <guid>https://til.chekos.dev/tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html</guid>
+  <pubDate>Fri, 08 May 2020 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

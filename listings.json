@@ -1,0 +1,19 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html",
+      "/tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html",
+      "/tils/2022/using-github-actions-to-produce-example-images-of-code/index.html",
+      "/tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html",
+      "/tils/2022/jq-syntax/index.html",
+      "/tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html",
+      "/tils/2020/how-to-delete-tags-on-remote-repos/index.html",
+      "/tils/2020/about-myst-parser-es-markdown-pero-rst/index.html",
+      "/tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html",
+      "/tils/2020/about-liquid-tags/index.html",
+      "/tils/2020/about-jekyll-archives/index.html",
+      "/tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html"
+    ]
+  }
+]
