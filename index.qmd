@@ -12,4 +12,4 @@ listing:
 page-layout: full
 ---
 
-
+a collection of things i've learned in my career from research associate to data engineer so far
