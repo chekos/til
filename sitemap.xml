@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://til.chekos.dev/about.html</loc>
-    <lastmod>2023-01-09T16:27:35.704Z</lastmod>
+    <loc>https://til.chekos.dev/index.html</loc>
+    <lastmod>2023-01-14T19:42:54.965Z</lastmod>
   </url>
   <url>
-    <loc>https://til.chekos.dev/index.html</loc>
-    <lastmod>2023-01-09T16:27:36.900Z</lastmod>
+    <loc>https://til.chekos.dev/about.html</loc>
+    <lastmod>2023-01-14T19:42:57.361Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html</loc>
-    <lastmod>2023-01-09T16:27:37.472Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2022/using-github-actions-to-produce-example-images-of-code/index.html</loc>
-    <lastmod>2023-01-09T16:27:37.824Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html</loc>
-    <lastmod>2023-01-09T16:27:38.408Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2022/jq-syntax/index.html</loc>
-    <lastmod>2023-01-09T16:27:38.936Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</loc>
-    <lastmod>2023-01-09T16:27:39.459Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html</loc>
-    <lastmod>2023-01-09T16:27:39.795Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2020/about-liquid-tags/index.html</loc>
-    <lastmod>2023-01-09T16:27:40.115Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html</loc>
-    <lastmod>2023-01-09T16:27:40.487Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2020/about-jekyll-archives/index.html</loc>
-    <lastmod>2023-01-09T16:27:40.843Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html</loc>
-    <lastmod>2023-01-09T16:27:41.383Z</lastmod>
-  </url>
-  <url>
-    <loc>https://til.chekos.dev/tils/2020/about-myst-parser-es-markdown-pero-rst/index.html</loc>
-    <lastmod>2023-01-09T16:27:41.711Z</lastmod>
+    <lastmod>2023-01-14T19:42:58.109Z</lastmod>
   </url>
   <url>
     <loc>https://til.chekos.dev/tils/2020/how-to-delete-tags-on-remote-repos/index.html</loc>
-    <lastmod>2023-01-09T16:27:42.243Z</lastmod>
+    <lastmod>2023-01-14T19:42:58.785Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2020/about-liquid-tags/index.html</loc>
+    <lastmod>2023-01-14T19:42:59.213Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html</loc>
+    <lastmod>2023-01-14T19:42:59.917Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2020/about-jekyll-archives/index.html</loc>
+    <lastmod>2023-01-14T19:43:00.349Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html</loc>
+    <lastmod>2023-01-14T19:43:00.813Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2020/about-myst-parser-es-markdown-pero-rst/index.html</loc>
+    <lastmod>2023-01-14T19:43:01.225Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html</loc>
+    <lastmod>2023-01-14T19:43:01.969Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</loc>
+    <lastmod>2023-01-14T19:43:02.669Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html</loc>
+    <lastmod>2023-01-14T19:43:03.141Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2022/jq-syntax/index.html</loc>
+    <lastmod>2023-01-14T19:43:03.845Z</lastmod>
+  </url>
+  <url>
+    <loc>https://til.chekos.dev/tils/2022/using-github-actions-to-produce-example-images-of-code/index.html</loc>
+    <lastmod>2023-01-14T19:43:04.301Z</lastmod>
   </url>
 </urlset>
