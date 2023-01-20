@@ -14,6 +14,111 @@
     "text": "¡hola! 👋🏼\nmy name is Sergio Sánchez Zavala but i go by chekos (/che/ like Guevara, /kos/ like ‘costly’, in lowercase) and i work as a data engineer. i’m a hip hop head policy wonk data nerd.\nthis section of chekos.dev is a collection of things i’ve learned. it was inspired by Simon Wilson’s and Vicki Boykis’ TIL repos."
   },
   {
+    "objectID": "tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html",
+    "href": "tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html",
+    "title": "How To Solve Permission Error From Airflow Official Docker Image",
+    "section": "",
+    "text": "tl;dr: when you use the Airflow official docker image you need to make sure that the variable AIRFLOW_UID is set to match your UID (and AIRFLOW_GID=0 aka root ) or you’re going to get permission errors. i was working on deploying Airflow on a VM at work this week and I got a permission error (Errno 13) regarding the containers’ python’s logging config. When I first started working with this docker-compose.yml i used the suggested echo -e \"AIRFLOW_UID=$(id -u)\" > .env command which provided my user id (let’s say it’s 506 ) from my local machine and assigned it to the AIRFLOW_UID key. Now that i am working in the VM and have extended my .env file to include other information i figured i could just use a copy of the same file. Everything else works fine except airflow cannot write logs because the user in this virtual machine with user id 506 does not have permission to write to this ./logs/ directory. If you google this error i found — among a sea of almost right answers — that most of the solutions online are variations of “change the logs folder’s permissions to 777” meaning anyone can read, write, and execute the contents of the logs. That works. However, you don’t really need everyone to be able to read and write — just this airflow user. Updating the UID on the VM’s .env file worked perfectly without having to mess with the permissions. ## how i learned i kept getting permissions errors so i changed the ./logs/ directories permissions to 777 and ran docker-compose up airflow-init . Now that airflow was able to write logs i could run ls -l logs/ and see that the owner of these logs was some user with id 506 which i recognized from the .env file. From there all i had to do was run id -u to find the correct user id (the id of the user i’m logged in as in this VM) and update the .env file to match. ## reference the airflow documentation → airflow.apache.org/docs/apache-airflow/stable/start/docker.html\nthis stackoverflow answer → stackoverflow.com/questions/67698656/cant-init-db-for-airflow-docker-compose-permission-denied/67704988\nthis fantastic explanation of user and groups permissions → unix.stackexchange.com/questions/116070/granting-write-permissions-to-a-group-to-a-folder"
+  },
+  {
+    "objectID": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html",
+    "href": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html",
+    "title": "How To Create An Alias In The gh-cli",
+    "section": "",
+    "text": "you can create aliases in the GitHub CLI. i’m not super familiar with aliases. i’ve used them in the past to automate long commands. currently i’m using a couple at work to shorten dbt commmands ever so slightly (from dbt run --target prod --select <models> to prod-run <selection query>).\nhowever, i had only seen these as aliases one sets up at the profile level/scope. as in, we’d go to ~/.bash_profile or ~/.zsh_profile and add a new alias that’s set every time we open a new terminal.\nthis is the first time i see a cli offer that within the tool itself. i wonder if this is a common practice i’ve missed until now.\nin the GitHub cli you can use the command alias set to set an alias (docs).\ni usually have to google the full list of flags i would like to run when creating a repo via the gh-cli so i figured i’d save it as an alias now. this is why i wish i remembered would like to run most times:\ngh repo create <name> \\\n--public \\\n--add-readme \\\n--clone \\\n--gitignore Python \\\n--license bsd-3-clause-clear\nsimplye create a public repo named  include a ReadME, a license and a gitignore file and finally clone it to the local directory.\ni might add the --disable-wiki simply because i don’t use the wikis.\nfrom the docs: > The expansion may specify additional arguments and flags. If the expansion includes positional placeholders such as “$1”, extra arguments that follow the alias will be inserted appropriately. Otherwise, extra arguments will be appended to the expanded command.\nso what i did was run\ngh alias set pyrepo 'repo create \"$1\" --public --add-readme --clone --gitignore=Python --license=bsd-3-clause-clear'\nand if i choose to i can add a description by adding -d \"my repos description\" right after gh pyrepo <name>"
+  },
+  {
+    "objectID": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#how-i-learned",
+    "href": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#how-i-learned",
+    "title": "How To Create An Alias In The gh-cli",
+    "section": "how i learned",
+    "text": "how i learned\ni’ve been creating lots of small project repos lately and this feels like a small automation that could solve some frustrations."
+  },
+  {
+    "objectID": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#reference",
+    "href": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#reference",
+    "title": "How To Create An Alias In The gh-cli",
+    "section": "reference",
+    "text": "reference\n\nGitHub CLI manual: https://cli.github.com/manual/\n\ngh alias set\ngh repo create\n\nGitHub Docs about licenses: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#searching-github-by-license-type"
+  },
+  {
+    "objectID": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html",
+    "href": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html",
+    "title": "How To Copy Json Straight To Clipboard From The Terminal",
+    "section": "",
+    "text": "Piping output to pbcopy to copy and paste output from the terminal\nHere’s how I can grab the last 10 elements of a JSON array and copy them to my clipboard.\njq '.[-10:]' mydata.json | pbcopy"
+  },
+  {
+    "objectID": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#how-i-learned",
+    "href": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#how-i-learned",
+    "title": "How To Copy Json Straight To Clipboard From The Terminal",
+    "section": "how i learned",
+    "text": "how i learned\nI’ve been working with my spotify streaming history data and it’s a lot of nested data so I’ve been using jq a lot.\nI’m working on restructuring a complicated nested JSON so I went to <jqplay.org> and I needed some sample data. I remember reading a tweet or maybe a tip on a Medium article about piping to pbcopy so I figured I’d try it and document it.\nThe final code looked more like\njq '.[-5:]' interim/streaming_history.json | pbcopy"
+  },
+  {
+    "objectID": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#reference",
+    "href": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#reference",
+    "title": "How To Copy Json Straight To Clipboard From The Terminal",
+    "section": "reference",
+    "text": "reference\n\njq play sandbox environment online: <jqplay.org>\n\nwhat i ended up using jqplay for: https://jqplay.org/s/AMl-8okc7or"
+  },
+  {
+    "objectID": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html",
+    "href": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html",
+    "title": "Using Github Actions To Produce Example Images Of Code",
+    "section": "",
+    "text": "I learned to chain a lot of small tools using GitHub Actions to produce ready-to-share images of code examples for social media (namely, instagram and twitter) from my phone. The steps, generally speaking, go as follows:\n\nCreate a new page on a Notion Database. Probably will create a specific template for this, like I do with TIL’s but it’s not necessary.\nGitHub Action: Use my markdownify-notion python package to write the markdown version of this page and save it on a “quarto project” folder. This let’s me use one general front-matter yaml file for all files rather than automate adding front matter to each file. I can still add specific front matter to files if I want to. (this TIL is an example of how this works - I’m writing it on Notion on my phone.)\nGitHub Action: Use Quarto to render this markdown file --to html and save it on an “output” directory. This will execute the code in the code cells and save the output inline.\nGitHub Action: Use shot-scraper to produce two files: a png screenshot and a pdf file. I’m using shot-scraper for the PDF as well rather than using quarto because it’s easier and I am not in need of customizing this pdf file at all just yet. I’m creating it and saving it essentially just because I can, it’s easy, and might find use for it later.\nGitHub Action: Once there are new png or pdf files in the “output” directory, I then use s3-credentials to put those objects on a S3 bucket I also created using s3-credentials . This tool is fantastic s3-credentials.readthedocs.io\n\nThis is how the final image looks like\n\n\n\n9EB00936-09DE-4836-93B6-8504E7E036A8"
+  },
+  {
+    "objectID": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html#how-i-learned",
+    "href": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html#how-i-learned",
+    "title": "Using Github Actions To Produce Example Images Of Code",
+    "section": "how i learned",
+    "text": "how i learned\nI wanted to checkout quarto for a while and in the last rstudio conference they announced it was finally at version 1.0 so I gave it a try. It’s fairly straightforward but the documentation is clearly aimed at helping beginners and people that may not have any programming experience so a lot of the guides and tutorials and examples are for using Quarto within an editor like Rstudio or VS Code. It was hard to find examples of how to use it programmatically on your own - even the automating examples are using their GitHub Actions and services like Quarto publishing. This is actually great in general but if you need to do something custom they may not offer yet you need to figure it out on your own. ## reference * Quarto: quarto.org\n\nshot-scraper: shot-scraper.datasette.io/en/stable/\ns3-credentials: s3-credentials.readthedocs.io/en/stable/\nmarkdownify-notion: github.com/chekos/markdownify-notion"
+  },
+  {
+    "objectID": "tils/2022/jq-syntax/index.html",
+    "href": "tils/2022/jq-syntax/index.html",
+    "title": "Jq [] Syntax",
+    "section": "",
+    "text": "If you want to dump a list of objects you’re constructing from some other json you need to wrap your entire jq string in square brackets ( [] ). Otherwise you’ll be writing each object one at a time and that’s not valid JSON. For example, running something like\njq '.[] | {id: .id, title: .title, created: .created }'\nreturns →\n{\n    id: \"123\",\n    title: \"page 1\",\n    created: \"2022-01-25T23:15:00.000Z\"\n}\n{\n    id: \"124\",\n    title: \"page 2\",\n    created: \"2022-01-26T13:18:15.000Z\"\n}\n{\n    id: \"125\",\n    title: \"page 3\",\n    created: \"2022-01-27T18:37:05.000Z\"\n}\nThis file is not valid JSON. However, if you wrap your entire expression in square brackets [] jq will group these all as a list of objects instead of appending each object at a time.\njq '[.[] | { id: .id, title: .title, created: .created }]'\nreturns →\n[\n    {\n        id: \"123\",\n        title: \"page 1\",\n        created: \"2022-01-25T23:15:00.000Z\"\n    },\n    {\n        id: \"124\",\n        title: \"page 2\",\n        created: \"2022-01-26T13:18:15.000Z\"\n    },\n    {\n        id: \"125\",\n        title: \"page 3\",\n        created: \"2022-01-27T18:37:05.000Z\"\n    }\n]"
+  },
+  {
+    "objectID": "tils/2022/jq-syntax/index.html#how-i-learned",
+    "href": "tils/2022/jq-syntax/index.html#how-i-learned",
+    "title": "Jq [] Syntax",
+    "section": "how i learned",
+    "text": "how i learned\nTesting the til-notion-integration and markdownify-notion I tried reading a list of TILs I had saved in a JSON file. However, each object was separated by a new line - not a comma. ## reference The solution (after many failed google searches) was found on a GitHub issue answered by the creator of jq → github.com/stedolan/jq/issues/124"
+  },
+  {
+    "objectID": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html",
+    "href": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html",
+    "title": "How To Execute A Shell Script In The Current Shell",
+    "section": "",
+    "text": "when you execute a shell script, it defaults to creating a new shell, executing the script in that shell and closing it. if you want to, for example, set environmental variables you would need to run the script in the current shell. let’s say you want to have a short shell script that sets the database url as an environmental variable called env_vars.sh.\n#!/bin/bash\nexport DATABASE_URL=\"super_secret_url\"\nif you run\nsh env_vars.sh\nin your terminal, it would run said script in a new shell and therefore those environmental variables would not be set in your current shell and would then be unavailable to your other scripts.\nto run that in your current shell you use the following syntax\n. ./env_vars.sh\nthis way your environmental variables are set in your current shell and you can use them as expected."
+  },
+  {
+    "objectID": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html#how-i-learned",
+    "href": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html#how-i-learned",
+    "title": "How To Execute A Shell Script In The Current Shell",
+    "section": "how i learned",
+    "text": "how i learned\ni’m testing SQLModel and wanted to test access to snowflake. instead of setting the environmental variables manually i thought i’d just run a script that had export snowflake_username=\"xyz\" etc, etc. however, when i ran the script and tried to use os.environ['snowflake_username'] i’d get an error.\nfinding the solution was surprisingly fast.\n\nvisit\nhttps://stackoverflow.com/questions/496702/can-a-shell-script-set-environment-variables-of-the-calling-shell"
+  },
+  {
+    "objectID": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html",
+    "href": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html",
+    "title": "You Can’T Use Special Characters In Unix Commands If You Use Single-Quotes",
+    "section": "",
+    "text": "You can’t insert variables in Unix commands if you’re using single quotes.\nthis won’t work\nexport SECRET=\"huh\"\n\necho 'you can not see my secret $SECRET'\nbut this will\nexport SECRET=\"huh\"\n\necho \"you can see my secret $SECRET\""
+  },
+  {
+    "objectID": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html#how-i-learned",
+    "href": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html#how-i-learned",
+    "title": "You Can’T Use Special Characters In Unix Commands If You Use Single-Quotes",
+    "section": "how i learned",
+    "text": "how i learned\nwhile setting up a GitHub action for the social tech collaborative website that would send a url to a specific slack channel, i would get $TARGET_URL instead of the actual url.\nturns out special characters are interpreted as literals with single-quotes.\nwhen you use double-quotes, special characters $, \\ and ` remain special 🙄\n\nSingle quotes (’ ‘) operate similarly to double quotes, but do not permit referencing variables, since the special meaning of $ is turned off. Within single quotes, every special character except’ gets interpreted literally. Consider single quotes (“full quoting”) to be a stricter method of quoting than double quotes (“partial quoting”).  - tldp.org"
+  },
+  {
     "objectID": "tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html",
     "href": "tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html",
     "title": "Escaping Liquid Tags With {% Raw %}",
@@ -42,18 +147,18 @@
     "text": "how i learned\nthe social tech collaborative website has a /categories/ page where each category has a header so you can get to each category via url like socialtech.us/categories#${category}. for example, you could go to socialtech.us/categories#texting if you wanted to see the plays with the tag texting. however, because each play can have multiple categories, plays would appear multiple times in the /categories page. we wanted a page per category.\nat first i thought i was going to have to some wild logic in a page to “fill” in each category and maybe use the page’s query params but that would not be done through jekyll since jekyll creates the static website only - you can’t use jekyll or liquid tags to play around with the query params.\nthe answer was found here: github.com/jekyll/jekyll/issues/5672\nall that was needed was 1. to add jekyll-archives to the list of plug-ins 2.\n# Archives\njekyll-archives:\n  enabled: ['categories']\n  layout: archive\n  permalinks:\n    category: '/category/:name/'\n\nadd an archive.html to _layouts/\n\n\nvisit\nhttps://github.com/jekyll/jekyll-archives"
   },
   {
-    "objectID": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html",
-    "href": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html",
-    "title": "You Can’T Use Special Characters In Unix Commands If You Use Single-Quotes",
+    "objectID": "tils/2020/how-to-delete-tags-on-remote-repos/index.html",
+    "href": "tils/2020/how-to-delete-tags-on-remote-repos/index.html",
+    "title": "How To Delete Tags On Remote Repos",
     "section": "",
-    "text": "You can’t insert variables in Unix commands if you’re using single quotes.\nthis won’t work\nexport SECRET=\"huh\"\n\necho 'you can not see my secret $SECRET'\nbut this will\nexport SECRET=\"huh\"\n\necho \"you can see my secret $SECRET\""
+    "text": "you can delete remote tags from your github repository using git push --delete origin <TAG NAME> or you can delete locally and then push those changes to your remote repo\ngit tag -d 0.0.7\ngit push origin :refs/tag/0.0.7"
   },
   {
-    "objectID": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html#how-i-learned",
-    "href": "tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html#how-i-learned",
-    "title": "You Can’T Use Special Characters In Unix Commands If You Use Single-Quotes",
+    "objectID": "tils/2020/how-to-delete-tags-on-remote-repos/index.html#how-i-learned",
+    "href": "tils/2020/how-to-delete-tags-on-remote-repos/index.html#how-i-learned",
+    "title": "How To Delete Tags On Remote Repos",
     "section": "how i learned",
-    "text": "how i learned\nwhile setting up a GitHub action for the social tech collaborative website that would send a url to a specific slack channel, i would get $TARGET_URL instead of the actual url.\nturns out special characters are interpreted as literals with single-quotes.\nwhen you use double-quotes, special characters $, \\ and ` remain special 🙄\n\nSingle quotes (’ ‘) operate similarly to double quotes, but do not permit referencing variables, since the special meaning of $ is turned off. Within single quotes, every special character except’ gets interpreted literally. Consider single quotes (“full quoting”) to be a stricter method of quoting than double quotes (“partial quoting”).  - tldp.org"
+    "text": "how i learned\nrecently someone became the very first contributor to pypums and when i merged their contribution and tried to automatically build and publish the package to PyPI i found myself making an error. at first i tried to create a release on github then i realized i had not changed the versions accordingly in setup.py and the other files. i had already tagged it as 0.0.7, however, so i had to delete the tag, fix the versions, tag it again.\ni had done this before a few times but this time i found this very quick and easy explanatory post: how to delete local and remote tags on git"
   },
   {
     "objectID": "tils/2020/about-liquid-tags/index.html",
@@ -82,110 +187,5 @@
     "title": "About Myst-Parser, Es Markdown Pero Rst",
     "section": "how i learned",
     "text": "how i learned\ni was creating the docs for tacosdedatos-utils and i rather not touch rST ever. i had seen @choldraf tweet about MyST before but i had not had the need to use it.\ntoday i made the documentation for that small utils package and it was actually a pleasant experience? the underlying concepts of rST (roles, directives, etc etc) are still a little fuzzy but the syntax makes a ton more sense now so it’s one less challenge for me.\nofficial docs: myst-parser.readthedocs.io"
-  },
-  {
-    "objectID": "tils/2020/how-to-delete-tags-on-remote-repos/index.html",
-    "href": "tils/2020/how-to-delete-tags-on-remote-repos/index.html",
-    "title": "How To Delete Tags On Remote Repos",
-    "section": "",
-    "text": "you can delete remote tags from your github repository using git push --delete origin <TAG NAME> or you can delete locally and then push those changes to your remote repo\ngit tag -d 0.0.7\ngit push origin :refs/tag/0.0.7"
-  },
-  {
-    "objectID": "tils/2020/how-to-delete-tags-on-remote-repos/index.html#how-i-learned",
-    "href": "tils/2020/how-to-delete-tags-on-remote-repos/index.html#how-i-learned",
-    "title": "How To Delete Tags On Remote Repos",
-    "section": "how i learned",
-    "text": "how i learned\nrecently someone became the very first contributor to pypums and when i merged their contribution and tried to automatically build and publish the package to PyPI i found myself making an error. at first i tried to create a release on github then i realized i had not changed the versions accordingly in setup.py and the other files. i had already tagged it as 0.0.7, however, so i had to delete the tag, fix the versions, tag it again.\ni had done this before a few times but this time i found this very quick and easy explanatory post: how to delete local and remote tags on git"
-  },
-  {
-    "objectID": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html",
-    "href": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html",
-    "title": "How To Copy Json Straight To Clipboard From The Terminal",
-    "section": "",
-    "text": "Piping output to pbcopy to copy and paste output from the terminal\nHere’s how I can grab the last 10 elements of a JSON array and copy them to my clipboard.\njq '.[-10:]' mydata.json | pbcopy"
-  },
-  {
-    "objectID": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#how-i-learned",
-    "href": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#how-i-learned",
-    "title": "How To Copy Json Straight To Clipboard From The Terminal",
-    "section": "how i learned",
-    "text": "how i learned\nI’ve been working with my spotify streaming history data and it’s a lot of nested data so I’ve been using jq a lot.\nI’m working on restructuring a complicated nested JSON so I went to <jqplay.org> and I needed some sample data. I remember reading a tweet or maybe a tip on a Medium article about piping to pbcopy so I figured I’d try it and document it.\nThe final code looked more like\njq '.[-5:]' interim/streaming_history.json | pbcopy"
-  },
-  {
-    "objectID": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#reference",
-    "href": "tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html#reference",
-    "title": "How To Copy Json Straight To Clipboard From The Terminal",
-    "section": "reference",
-    "text": "reference\n\njq play sandbox environment online: <jqplay.org>\n\nwhat i ended up using jqplay for: https://jqplay.org/s/AMl-8okc7or"
-  },
-  {
-    "objectID": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html",
-    "href": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html",
-    "title": "How To Create An Alias In The gh-cli",
-    "section": "",
-    "text": "you can create aliases in the GitHub CLI. i’m not super familiar with aliases. i’ve used them in the past to automate long commands. currently i’m using a couple at work to shorten dbt commmands ever so slightly (from dbt run --target prod --select <models> to prod-run <selection query>).\nhowever, i had only seen these as aliases one sets up at the profile level/scope. as in, we’d go to ~/.bash_profile or ~/.zsh_profile and add a new alias that’s set every time we open a new terminal.\nthis is the first time i see a cli offer that within the tool itself. i wonder if this is a common practice i’ve missed until now.\nin the GitHub cli you can use the command alias set to set an alias (docs).\ni usually have to google the full list of flags i would like to run when creating a repo via the gh-cli so i figured i’d save it as an alias now. this is why i wish i remembered would like to run most times:\ngh repo create <name> \\\n--public \\\n--add-readme \\\n--clone \\\n--gitignore Python \\\n--license bsd-3-clause-clear\nsimplye create a public repo named  include a ReadME, a license and a gitignore file and finally clone it to the local directory.\ni might add the --disable-wiki simply because i don’t use the wikis.\nfrom the docs: > The expansion may specify additional arguments and flags. If the expansion includes positional placeholders such as “$1”, extra arguments that follow the alias will be inserted appropriately. Otherwise, extra arguments will be appended to the expanded command.\nso what i did was run\ngh alias set pyrepo 'repo create \"$1\" --public --add-readme --clone --gitignore=Python --license=bsd-3-clause-clear'\nand if i choose to i can add a description by adding -d \"my repos description\" right after gh pyrepo <name>"
-  },
-  {
-    "objectID": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#how-i-learned",
-    "href": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#how-i-learned",
-    "title": "How To Create An Alias In The gh-cli",
-    "section": "how i learned",
-    "text": "how i learned\ni’ve been creating lots of small project repos lately and this feels like a small automation that could solve some frustrations."
-  },
-  {
-    "objectID": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#reference",
-    "href": "tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html#reference",
-    "title": "How To Create An Alias In The gh-cli",
-    "section": "reference",
-    "text": "reference\n\nGitHub CLI manual: https://cli.github.com/manual/\n\ngh alias set\ngh repo create\n\nGitHub Docs about licenses: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#searching-github-by-license-type"
-  },
-  {
-    "objectID": "tils/2022/jq-syntax/index.html",
-    "href": "tils/2022/jq-syntax/index.html",
-    "title": "Jq [] Syntax",
-    "section": "",
-    "text": "If you want to dump a list of objects you’re constructing from some other json you need to wrap your entire jq string in square brackets ( [] ). Otherwise you’ll be writing each object one at a time and that’s not valid JSON. For example, running something like\njq '.[] | {id: .id, title: .title, created: .created }'\nreturns →\n{\n    id: \"123\",\n    title: \"page 1\",\n    created: \"2022-01-25T23:15:00.000Z\"\n}\n{\n    id: \"124\",\n    title: \"page 2\",\n    created: \"2022-01-26T13:18:15.000Z\"\n}\n{\n    id: \"125\",\n    title: \"page 3\",\n    created: \"2022-01-27T18:37:05.000Z\"\n}\nThis file is not valid JSON. However, if you wrap your entire expression in square brackets [] jq will group these all as a list of objects instead of appending each object at a time.\njq '[.[] | { id: .id, title: .title, created: .created }]'\nreturns →\n[\n    {\n        id: \"123\",\n        title: \"page 1\",\n        created: \"2022-01-25T23:15:00.000Z\"\n    },\n    {\n        id: \"124\",\n        title: \"page 2\",\n        created: \"2022-01-26T13:18:15.000Z\"\n    },\n    {\n        id: \"125\",\n        title: \"page 3\",\n        created: \"2022-01-27T18:37:05.000Z\"\n    }\n]"
-  },
-  {
-    "objectID": "tils/2022/jq-syntax/index.html#how-i-learned",
-    "href": "tils/2022/jq-syntax/index.html#how-i-learned",
-    "title": "Jq [] Syntax",
-    "section": "how i learned",
-    "text": "how i learned\nTesting the til-notion-integration and markdownify-notion I tried reading a list of TILs I had saved in a JSON file. However, each object was separated by a new line - not a comma. ## reference The solution (after many failed google searches) was found on a GitHub issue answered by the creator of jq → github.com/stedolan/jq/issues/124"
-  },
-  {
-    "objectID": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html",
-    "href": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html",
-    "title": "Using Github Actions To Produce Example Images Of Code",
-    "section": "",
-    "text": "I learned to chain a lot of small tools using GitHub Actions to produce ready-to-share images of code examples for social media (namely, instagram and twitter) from my phone. The steps, generally speaking, go as follows:\n\nCreate a new page on a Notion Database. Probably will create a specific template for this, like I do with TIL’s but it’s not necessary.\nGitHub Action: Use my markdownify-notion python package to write the markdown version of this page and save it on a “quarto project” folder. This let’s me use one general front-matter yaml file for all files rather than automate adding front matter to each file. I can still add specific front matter to files if I want to. (this TIL is an example of how this works - I’m writing it on Notion on my phone.)\nGitHub Action: Use Quarto to render this markdown file --to html and save it on an “output” directory. This will execute the code in the code cells and save the output inline.\nGitHub Action: Use shot-scraper to produce two files: a png screenshot and a pdf file. I’m using shot-scraper for the PDF as well rather than using quarto because it’s easier and I am not in need of customizing this pdf file at all just yet. I’m creating it and saving it essentially just because I can, it’s easy, and might find use for it later.\nGitHub Action: Once there are new png or pdf files in the “output” directory, I then use s3-credentials to put those objects on a S3 bucket I also created using s3-credentials . This tool is fantastic s3-credentials.readthedocs.io\n\nThis is how the final image looks like\n\n\n\n9EB00936-09DE-4836-93B6-8504E7E036A8"
-  },
-  {
-    "objectID": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html#how-i-learned",
-    "href": "tils/2022/using-github-actions-to-produce-example-images-of-code/index.html#how-i-learned",
-    "title": "Using Github Actions To Produce Example Images Of Code",
-    "section": "how i learned",
-    "text": "how i learned\nI wanted to checkout quarto for a while and in the last rstudio conference they announced it was finally at version 1.0 so I gave it a try. It’s fairly straightforward but the documentation is clearly aimed at helping beginners and people that may not have any programming experience so a lot of the guides and tutorials and examples are for using Quarto within an editor like Rstudio or VS Code. It was hard to find examples of how to use it programmatically on your own - even the automating examples are using their GitHub Actions and services like Quarto publishing. This is actually great in general but if you need to do something custom they may not offer yet you need to figure it out on your own. ## reference * Quarto: quarto.org\n\nshot-scraper: shot-scraper.datasette.io/en/stable/\ns3-credentials: s3-credentials.readthedocs.io/en/stable/\nmarkdownify-notion: github.com/chekos/markdownify-notion"
-  },
-  {
-    "objectID": "tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html",
-    "href": "tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html",
-    "title": "How To Solve Permission Error From Airflow Official Docker Image",
-    "section": "",
-    "text": "tl;dr: when you use the Airflow official docker image you need to make sure that the variable AIRFLOW_UID is set to match your UID (and AIRFLOW_GID=0 aka root ) or you’re going to get permission errors. i was working on deploying Airflow on a VM at work this week and I got a permission error (Errno 13) regarding the containers’ python’s logging config. When I first started working with this docker-compose.yml i used the suggested echo -e \"AIRFLOW_UID=$(id -u)\" > .env command which provided my user id (let’s say it’s 506 ) from my local machine and assigned it to the AIRFLOW_UID key. Now that i am working in the VM and have extended my .env file to include other information i figured i could just use a copy of the same file. Everything else works fine except airflow cannot write logs because the user in this virtual machine with user id 506 does not have permission to write to this ./logs/ directory. If you google this error i found — among a sea of almost right answers — that most of the solutions online are variations of “change the logs folder’s permissions to 777” meaning anyone can read, write, and execute the contents of the logs. That works. However, you don’t really need everyone to be able to read and write — just this airflow user. Updating the UID on the VM’s .env file worked perfectly without having to mess with the permissions. ## how i learned i kept getting permissions errors so i changed the ./logs/ directories permissions to 777 and ran docker-compose up airflow-init . Now that airflow was able to write logs i could run ls -l logs/ and see that the owner of these logs was some user with id 506 which i recognized from the .env file. From there all i had to do was run id -u to find the correct user id (the id of the user i’m logged in as in this VM) and update the .env file to match. ## reference the airflow documentation → airflow.apache.org/docs/apache-airflow/stable/start/docker.html\nthis stackoverflow answer → stackoverflow.com/questions/67698656/cant-init-db-for-airflow-docker-compose-permission-denied/67704988\nthis fantastic explanation of user and groups permissions → unix.stackexchange.com/questions/116070/granting-write-permissions-to-a-group-to-a-folder"
-  },
-  {
-    "objectID": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html",
-    "href": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html",
-    "title": "How To Execute A Shell Script In The Current Shell",
-    "section": "",
-    "text": "when you execute a shell script, it defaults to creating a new shell, executing the script in that shell and closing it. if you want to, for example, set environmental variables you would need to run the script in the current shell. let’s say you want to have a short shell script that sets the database url as an environmental variable called env_vars.sh.\n#!/bin/bash\nexport DATABASE_URL=\"super_secret_url\"\nif you run\nsh env_vars.sh\nin your terminal, it would run said script in a new shell and therefore those environmental variables would not be set in your current shell and would then be unavailable to your other scripts.\nto run that in your current shell you use the following syntax\n. ./env_vars.sh\nthis way your environmental variables are set in your current shell and you can use them as expected."
-  },
-  {
-    "objectID": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html#how-i-learned",
-    "href": "tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html#how-i-learned",
-    "title": "How To Execute A Shell Script In The Current Shell",
-    "section": "how i learned",
-    "text": "how i learned\ni’m testing SQLModel and wanted to test access to snowflake. instead of setting the environmental variables manually i thought i’d just run a script that had export snowflake_username=\"xyz\" etc, etc. however, when i ran the script and tried to use os.environ['snowflake_username'] i’d get an error.\nfinding the solution was surprisingly fast.\n\nvisit\nhttps://stackoverflow.com/questions/496702/can-a-shell-script-set-environment-variables-of-the-calling-shell"
   }
 ]
