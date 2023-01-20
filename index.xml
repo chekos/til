@@ -10,7 +10,7 @@
 <atom:link href="https://til.chekos.dev/index.xml" rel="self" type="application/rss+xml"/>
 <description>chekos&#39; today i learned</description>
 <generator>quarto-1.2.313</generator>
-<lastBuildDate>Sat, 31 Dec 2022 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 31 Dec 2022 00:00:00 GMT</lastBuildDate>
 <item>
   <title>How To Copy Json Straight To Clipboard From The Terminal</title>
   <link>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</link>
@@ -47,7 +47,7 @@
   <category>jq</category>
   <category>shell</category>
   <guid>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</guid>
-  <pubDate>Sat, 31 Dec 2022 06:00:00 GMT</pubDate>
+  <pubDate>Sat, 31 Dec 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How To Create An Alias In The gh-cli</title>
@@ -98,7 +98,7 @@
   <category>gh</category>
   <category>automation</category>
   <guid>https://til.chekos.dev/tils/2022/how-to-create-an-alias-in-the-gh-cli/index.html</guid>
-  <pubDate>Wed, 28 Dec 2022 06:00:00 GMT</pubDate>
+  <pubDate>Wed, 28 Dec 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Using Github Actions To Produce Example Images Of Code</title>
@@ -143,7 +143,7 @@
   <category>quarto</category>
   <category>notion</category>
   <guid>https://til.chekos.dev/tils/2022/using-github-actions-to-produce-example-images-of-code/index.html</guid>
-  <pubDate>Sun, 14 Aug 2022 05:00:00 GMT</pubDate>
+  <pubDate>Sun, 14 Aug 2022 00:00:00 GMT</pubDate>
   <media:content url="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/04380cef-2bfc-43f9-a2af-5feed89f0ac4/9EB00936-09DE-4836-93B6-8504E7E036A8.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221216%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20221216T205710Z&amp;X-Amz-Expires=3600&amp;X-Amz-Signature=fa6ba352215a639f6a8d3c89cb72397e0d310da5ef891c439e528def853f20dc&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" medium="image"/>
 </item>
 <item>
@@ -167,7 +167,7 @@
   <category>airflow</category>
   <category>python</category>
   <guid>https://til.chekos.dev/tils/2022/how-to-solve-permission-error-from-airflow-official-docker-image/index.html</guid>
-  <pubDate>Thu, 27 Jan 2022 06:00:00 GMT</pubDate>
+  <pubDate>Thu, 27 Jan 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Jq [] Syntax</title>
@@ -228,7 +228,7 @@
   <category>jq</category>
   <category>shell</category>
   <guid>https://til.chekos.dev/tils/2022/jq-syntax/index.html</guid>
-  <pubDate>Tue, 25 Jan 2022 06:00:00 GMT</pubDate>
+  <pubDate>Tue, 25 Jan 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How To Execute A Shell Script In The Current Shell</title>
@@ -264,7 +264,7 @@
  ]]></description>
   <category>shell</category>
   <guid>https://til.chekos.dev/tils/2021/how-to-execute-a-shell-script-in-the-current-shell/index.html</guid>
-  <pubDate>Thu, 09 Sep 2021 05:00:00 GMT</pubDate>
+  <pubDate>Thu, 09 Sep 2021 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How To Delete Tags On Remote Repos</title>
@@ -290,7 +290,7 @@
  ]]></description>
   <category>git</category>
   <guid>https://til.chekos.dev/tils/2020/how-to-delete-tags-on-remote-repos/index.html</guid>
-  <pubDate>Tue, 23 Jun 2020 05:00:00 GMT</pubDate>
+  <pubDate>Tue, 23 Jun 2020 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>About Myst-Parser, Es Markdown Pero Rst</title>
@@ -316,7 +316,7 @@
   <category>sphinx</category>
   <category>docs</category>
   <guid>https://til.chekos.dev/tils/2020/about-myst-parser-es-markdown-pero-rst/index.html</guid>
-  <pubDate>Mon, 22 Jun 2020 05:00:00 GMT</pubDate>
+  <pubDate>Mon, 22 Jun 2020 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Escaping Liquid Tags With {% Raw %}</title>
@@ -353,7 +353,7 @@
   <category>jekyll</category>
   <category>liquid tags</category>
   <guid>https://til.chekos.dev/tils/2020/escaping-liquid-tags-with-percent-raw-percent/index.html</guid>
-  <pubDate>Thu, 18 Jun 2020 05:00:00 GMT</pubDate>
+  <pubDate>Thu, 18 Jun 2020 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>About Liquid Tags</title>
@@ -378,7 +378,7 @@
   <category>jekyll</category>
   <category>liquid tags</category>
   <guid>https://til.chekos.dev/tils/2020/about-liquid-tags/index.html</guid>
-  <pubDate>Mon, 15 Jun 2020 05:00:00 GMT</pubDate>
+  <pubDate>Mon, 15 Jun 2020 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>About Jekyll-Archives</title>
@@ -421,7 +421,7 @@ font-style: italic;">category: </span><span class="vs" style="color: #20794D;">'
  ]]></description>
   <category>jekyll</category>
   <guid>https://til.chekos.dev/tils/2020/about-jekyll-archives/index.html</guid>
-  <pubDate>Fri, 22 May 2020 05:00:00 GMT</pubDate>
+  <pubDate>Fri, 22 May 2020 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>You Can’T Use Special Characters In Unix Commands If You Use Single-Quotes</title>
@@ -457,7 +457,7 @@ font-style: italic;">category: </span><span class="vs" style="color: #20794D;">'
  ]]></description>
   <category>unix</category>
   <guid>https://til.chekos.dev/tils/2020/you-cant-use-special-characters-in-unix-commands-if-you-use-single-quotes/index.html</guid>
-  <pubDate>Fri, 08 May 2020 05:00:00 GMT</pubDate>
+  <pubDate>Fri, 08 May 2020 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
