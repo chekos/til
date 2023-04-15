@@ -9,8 +9,78 @@
 <link>https://til.chekos.dev/index.html</link>
 <atom:link href="https://til.chekos.dev/index.xml" rel="self" type="application/rss+xml"/>
 <description>chekos&#39; today i learned</description>
-<generator>quarto-1.2.313</generator>
-<lastBuildDate>Sat, 31 Dec 2022 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.2.475</generator>
+<lastBuildDate>Sat, 15 Apr 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Setting Up Ffmpeg As Lambda Layer</title>
+  <link>https://til.chekos.dev/tils/2023/setting-up-ffmpeg-as-lambda-layer/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
+<p>how to add <code>ffmpeg</code> and <code>ffprobe</code> as a lambda layer to be used by lambda functions.</p>
+<section id="getting-ffmpeg" class="level3">
+<h3 class="anchored" data-anchor-id="getting-ffmpeg">Getting ffmpeg</h3>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"># ffmpeg</span>
+<span id="cb1-2">wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"># checksum</span>
+<span id="cb1-5">wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz.md5</span>
+<span id="cb1-6"></span>
+<span id="cb1-7">md5sum -c ffmpeg-release-amd64-static.tar.xz.md5</span>
+<span id="cb1-8"></span>
+<span id="cb1-9"># extract</span>
+<span id="cb1-10">tar xvf ffmpeg-release-amd64-static.tar.xz</span></code></pre></div>
+<p><strong>Side note</strong>: i had to <code>brew install md5sha1sum</code> and <code>brew install wget</code> on my local laptop</p>
+</section>
+<section id="creating-lambda-layer" class="level3">
+<h3 class="anchored" data-anchor-id="creating-lambda-layer">Creating Lambda Layer</h3>
+<ol type="1">
+<li>create <code>ffmpeg/bin/</code></li>
+<li>copy <code>ffmpeg</code> into it</li>
+<li>zip <code>ffmpeg/</code></li>
+</ol>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"># Create bin/</span>
+<span id="cb2-2">mkdir -p ffmpeg/bin</span>
+<span id="cb2-3"></span>
+<span id="cb2-4"># Copy ffmpeg</span>
+<span id="cb2-5">cp ffmpeg-6.0-amd64-static/ffmpeg ffmpeg/bin</span>
+<span id="cb2-6"></span>
+<span id="cb2-7"># Zip directory</span>
+<span id="cb2-8">cd ffmpeg</span>
+<span id="cb2-9">zip -r ../ffmpeg.zip .</span></code></pre></div>
+</section>
+<section id="finally" class="level3">
+<h3 class="anchored" data-anchor-id="finally">Finally</h3>
+<p>Upload zip file as a lambda layer.</p>
+</section>
+<section id="bonus" class="level3">
+<h3 class="anchored" data-anchor-id="bonus">Bonus</h3>
+<p>In my case I also included <code>ffprobe</code> as it’s also required for <code>whisper</code>.</p>
+</section>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>i’ve been using OpenAI’s whisper and i want to set it up as a lambda function to transcribe files as they land on an S3 bucket.</p>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">reference</h2>
+<ul>
+<li><a href="https://aws.amazon.com/blogs/media/processing-user-generated-content-using-aws-lambda-and-ffmpeg/">AWS blog: “Processing User Generated Content using AWS Lambda and FFmpeg</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>aws</category>
+  <category>serverless</category>
+  <category>ffmpeg</category>
+  <guid>https://til.chekos.dev/tils/2023/setting-up-ffmpeg-as-lambda-layer/index.html</guid>
+  <pubDate>Sat, 15 Apr 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>How To Copy Json Straight To Clipboard From The Terminal</title>
   <link>https://til.chekos.dev/tils/2022/how-to-copy-json-straight-to-clipboard-from-the-terminal/index.html</link>

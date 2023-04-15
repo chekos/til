@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-01-27">
+<meta name="dcterms.date" content="2023-04-15">
 
-<title>til - How To Solve Permission Error From Airflow Official Docker Image</title>
+<title>til - Setting Up Ffmpeg As Lambda Layer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -64,11 +127,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../../../css/styles.css">
-<meta property="og:title" content="til - How To Solve Permission Error From Airflow Official Docker Image">
-<meta property="og:description" content="tl;dr: when you use the Airflow official docker image you need to make sure that the variable AIRFLOW_UID is set to match your UID (and AIRFLOW_GID=0 aka root ) or you’re going to get permission…">
+<meta property="og:title" content="til - Setting Up Ffmpeg As Lambda Layer">
+<meta property="og:description" content="how to add ffmpeg and ffprobe as a lambda layer to be used by lambda functions.">
 <meta property="og:site-name" content="til">
-<meta name="twitter:title" content="til - How To Solve Permission Error From Airflow Official Docker Image">
-<meta name="twitter:description" content="tl;dr: when you use the Airflow official docker image you need to make sure that the variable AIRFLOW_UID is set to match your UID (and AIRFLOW_GID=0 aka root ) or you’re going to get permission…">
+<meta name="twitter:title" content="til - Setting Up Ffmpeg As Lambda Layer">
+<meta name="twitter:description" content="how to add ffmpeg and ffprobe as a lambda layer to be used by lambda functions.">
 <meta name="twitter:creator" content="@ChekosWH">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -148,7 +211,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-i-learned" id="toc-what-i-learned" class="nav-link active" data-scroll-target="#what-i-learned">what i learned</a></li>
+  <li><a href="#what-i-learned" id="toc-what-i-learned" class="nav-link active" data-scroll-target="#what-i-learned">what i learned</a>
+  <ul class="collapse">
+  <li><a href="#getting-ffmpeg" id="toc-getting-ffmpeg" class="nav-link" data-scroll-target="#getting-ffmpeg">Getting ffmpeg</a></li>
+  <li><a href="#creating-lambda-layer" id="toc-creating-lambda-layer" class="nav-link" data-scroll-target="#creating-lambda-layer">Creating Lambda Layer</a></li>
+  <li><a href="#finally" id="toc-finally" class="nav-link" data-scroll-target="#finally">Finally</a></li>
+  <li><a href="#bonus" id="toc-bonus" class="nav-link" data-scroll-target="#bonus">Bonus</a></li>
+  </ul></li>
+  <li><a href="#how-i-learned" id="toc-how-i-learned" class="nav-link" data-scroll-target="#how-i-learned">how i learned</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">reference</a></li>
   </ul>
 </nav>
 </nav>
@@ -160,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">How To Solve Permission Error From Airflow Official Docker Image</h1>
+<h1 class="title">Setting Up Ffmpeg As Lambda Layer</h1>
   </div>
 
 
@@ -171,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 27, 2022</p>
+      <p class="date">April 15, 2023</p>
     </div>
   </div>
   
@@ -183,9 +254,56 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-i-learned" class="level2">
 <h2 class="anchored" data-anchor-id="what-i-learned">what i learned</h2>
-<p>tl;dr: when you use the Airflow official docker image you need to make sure that the variable <code>AIRFLOW_UID</code> is set to match <strong>your</strong> UID (and <code>AIRFLOW_GID=0</code> aka <code>root</code> ) or you’re going to get permission errors. i was working on deploying Airflow on a VM at work this week and I got a permission error (Errno 13) regarding the containers’ python’s logging config. When I first started working with this <code>docker-compose.yml</code> i used the suggested <code>echo -e "AIRFLOW_UID=$(id -u)" &gt; .env</code> command which provided my user id (let’s say it’s <strong>506</strong> ) from my local machine and assigned it to the <code>AIRFLOW_UID</code> key. Now that i am working in the VM and have extended my <code>.env</code> file to include other information i figured i could just use a copy of the same file. Everything else works fine except airflow cannot write logs because the user in this virtual machine with user id <strong>506</strong> does not have permission to write to this <code>./logs/</code> directory. If you google this error i found — among a sea of <em>almost</em> right answers — that most of the solutions online are variations of “change the logs folder’s permissions to 777” meaning anyone can read, write, and execute the contents of the logs. That works. However, you don’t really need <em>everyone</em> to be able to read and write — just this airflow user. Updating the UID on the VM’s <code>.env</code> file worked perfectly without having to mess with the permissions. ## how i learned i kept getting permissions errors so i changed the <code>./logs/</code> directories permissions to 777 and ran <code>docker-compose up airflow-init</code> . Now that airflow was able to write logs i could run <code>ls -l logs/</code> and see that the owner of these logs was some user with id <strong>506</strong> which i recognized from the <code>.env</code> file. From there all i had to do was run <code>id -u</code> to find the correct user id (the id of the user i’m logged in as in this VM) and update the <code>.env</code> file to match. ## reference the airflow documentation → <a href="https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html#setting-the-right-airflow-user">airflow.apache.org/docs/apache-airflow/stable/start/docker.html</a></p>
-<p>this stackoverflow answer → <a href="https://stackoverflow.com/questions/67698656/cant-init-db-for-airflow-docker-compose-permission-denied/67704988#67704988">stackoverflow.com/questions/67698656/cant-init-db-for-airflow-docker-compose-permission-denied/67704988</a></p>
-<p>this <strong>fantastic</strong> explanation of user and groups permissions → <a href="https://unix.stackexchange.com/questions/116070/granting-write-permissions-to-a-group-to-a-folder">unix.stackexchange.com/questions/116070/granting-write-permissions-to-a-group-to-a-folder</a></p>
+<p>how to add <code>ffmpeg</code> and <code>ffprobe</code> as a lambda layer to be used by lambda functions.</p>
+<section id="getting-ffmpeg" class="level3">
+<h3 class="anchored" data-anchor-id="getting-ffmpeg">Getting ffmpeg</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a># ffmpeg</span>
+<span id="cb1-2"><a href="#cb1-2"></a>wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a># checksum</span>
+<span id="cb1-5"><a href="#cb1-5"></a>wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz.md5</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>md5sum -c ffmpeg-release-amd64-static.tar.xz.md5</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a># extract</span>
+<span id="cb1-10"><a href="#cb1-10"></a>tar xvf ffmpeg-release-amd64-static.tar.xz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Side note</strong>: i had to <code>brew install md5sha1sum</code> and <code>brew install wget</code> on my local laptop</p>
+</section>
+<section id="creating-lambda-layer" class="level3">
+<h3 class="anchored" data-anchor-id="creating-lambda-layer">Creating Lambda Layer</h3>
+<ol type="1">
+<li>create <code>ffmpeg/bin/</code></li>
+<li>copy <code>ffmpeg</code> into it</li>
+<li>zip <code>ffmpeg/</code></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a># Create bin/</span>
+<span id="cb2-2"><a href="#cb2-2"></a>mkdir -p ffmpeg/bin</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a># Copy ffmpeg</span>
+<span id="cb2-5"><a href="#cb2-5"></a>cp ffmpeg-6.0-amd64-static/ffmpeg ffmpeg/bin</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a># Zip directory</span>
+<span id="cb2-8"><a href="#cb2-8"></a>cd ffmpeg</span>
+<span id="cb2-9"><a href="#cb2-9"></a>zip -r ../ffmpeg.zip .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="finally" class="level3">
+<h3 class="anchored" data-anchor-id="finally">Finally</h3>
+<p>Upload zip file as a lambda layer.</p>
+</section>
+<section id="bonus" class="level3">
+<h3 class="anchored" data-anchor-id="bonus">Bonus</h3>
+<p>In my case I also included <code>ffprobe</code> as it’s also required for <code>whisper</code>.</p>
+</section>
+</section>
+<section id="how-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-learned">how i learned</h2>
+<p>i’ve been using OpenAI’s whisper and i want to set it up as a lambda function to transcribe files as they land on an S3 bucket.</p>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">reference</h2>
+<ul>
+<li><a href="https://aws.amazon.com/blogs/media/processing-user-generated-content-using-aws-lambda-and-ffmpeg/">AWS blog: “Processing User Generated Content using AWS Lambda and FFmpeg</a></li>
+</ul>
 
 
 </section>
